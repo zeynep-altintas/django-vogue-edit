@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Order Form{% endblock %}
+
+{% block content %}
+    <div class="container my-4">
+        <h2 class="text-center">Order Summary</h2>
+        
+        <div class="order-summary mb-4">
+            <h4>Your Items:</h4>
+            <div class="basket-container">
+                {% for item in sbi %}
+                    <div class="basket-item d-flex align-items-center mb-3">
+                        <img src="{{ item.product_id.product_image.url }}" class="img-fluid" style="max-width: 100px; margin-right: 20px;" alt="{{ item.product_id.name }}"/>
+                        <div class="flex-grow-1">
+                            <h5>{{ item.product_id.name }}</h5>
+                            <p>Quantity: {{ item.quantity }}</p>
+                            <p>Price: €{{ item.item_price }}</p>
+                            <div>
+                                <a href="/removeitem/{{ item.id }}" class="btn btn-danger">Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <form method="POST" action=".">
+            {% csrf_token %}
+            
+            <h4>Shipping Information</h4>
+            <div class="mb-3">
+                <label for="shipping_addr">Shipping Address:</label>
+                <textarea id="shipping_addr" name="shipping_addr" class="form-control" rows="3" required></textarea>
+            </div>
+            
+            <h4>Billing Information</h4>
+            <div class="mb-3">
+                <label for="billing_address">Billing Address:</label>
+                <textarea id="billing_address" name="billing_address" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <h4>Payment Information</h4>
+            <div class="mb-3">
+                <label for="payment_info">Payment Information:</label>
+                <input type="text" id="payment_info" name="payment_info" class="form-control" required placeholder="e.g., Credit Card Number"/>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-vogue">Place Order</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

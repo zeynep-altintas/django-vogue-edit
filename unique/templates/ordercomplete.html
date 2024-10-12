@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Order Complete{% endblock %}
+
+{% block content %}
+    <div class="container my-4">
+        <h1 class="text-center">Thank you for your order!</h1>
+
+        <h4 class="mt-4">Your Order Summary:</h4>
+        <div class="order-summary">
+            {% for item in sbi %}
+                <div class="order-item d-flex align-items-center mb-3">
+                    <img src="{{ item.product_id.product_image.url }}" class="img-fluid" style="max-width: 100px; margin-right: 20px;" alt="{{ item.product_id.name }}"/>
+                    <div class="flex-grow-1">
+                        <h5>{{ item.product_id.name }}</h5>
+                        <p>Quantity: {{ item.quantity }}</p>
+                        <p>Price: €{{ item.item_price }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <h4 class="mt-4">Shipping Information:</h4>
+        <p>Ship to: {{ order.shipping_addr }}</p>
+
+        <h4 class="mt-4">Total Price:</h4>
+        <p>€{{ order.total_price }}</p>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'products' %}" class="btn btn-vogue">Continue Shopping</a>
+        </div>
+    </div>
+{% endblock %}

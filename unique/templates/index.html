@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="index-background">
+    <div class="intro-box">
+        <p>Welcome to The Vogue Edit! We offer a magazine 
+            archive online shop featuring a diverse range 
+            of Vogue releases from around the globe, all discoverable 
+            on our website.</p>
+        <a href="{% url 'products' %}" class="btn btn-vogue btn-lg">Shop Now</a>
+    </div>
+</div>
+{% endblock %}

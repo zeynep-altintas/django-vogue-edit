@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Order History{% endblock %}
+
+{% block content %}
+    <div class="container my-4">
+        <h2 class="text-center">Your Order History</h2>
+
+        {% if orders %}
+            <div class="row">
+                {% for ord in orders %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Order ID: {{ ord.id }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Ordered on: {{ ord.date_ordered }}</h6>
+                                <p class="card-text"><strong>Shipping to:</strong> {{ ord.shipping_addr }}</p>
+                                <p class="card-text"><strong>Total Price:</strong> €{{ ord.total_price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info text-center">
+                <p>You have no orders yet.</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

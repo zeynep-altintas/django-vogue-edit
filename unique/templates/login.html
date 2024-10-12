@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    User Login
+{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <form action="." method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.username.label_tag }}
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                {{ form.password.label_tag }}
+                {{ form.password }}
+            </div>
+            <button type="submit" class="btn-vogue">Login</button>
+        </form>
+    </div>
+{% endblock %}

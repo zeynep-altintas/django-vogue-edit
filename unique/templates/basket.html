@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Basket{% endblock %}
+
+{% block content %}
+    <div class="container my-4">
+        <h2 class="text-center">Your Shopping Basket</h2>
+
+        {% if empty %}
+            <div class="text-center">
+                <p>Your shopping basket is empty.</p>
+                <a href="{% url 'products' %}" class="btn btn-vogue">Continue Shopping</a>
+            </div>
+        {% else %}
+            <div class="basket-container">
+                {% for item in sbi %}
+                    <div class="basket-item d-flex align-items-center mb-3">
+                        <img src="{{ item.product_id.product_image.url }}" class="img-fluid" style="max-width: 100px; margin-right: 20px;" alt="{{ item.product_id.name }}"/>
+                        <div class="flex-grow-1">
+                            <h5>{{ item.product_id.name }}</h5>
+                            <p>Quantity: {{ item.quantity }}</p>
+                            <p>€{{ item.item_price }}</p>
+                            <div>
+                                <a href="/additem/{{ item.id }}" class="btn btn-vogue">Add</a>
+                                <a href="/removeitem/{{ item.id }}" class="btn btn-danger">Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="text-center mt-4">
+                <a href="/order/" class="btn btn-vogue">Place Order</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
